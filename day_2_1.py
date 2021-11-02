@@ -22,3 +22,16 @@ def count_passing(policy_list):
             count += 1
     return count
 
+def count_passing_indices(policy_list):
+    count = 0
+    for i, policy in enumerate(policy_list):
+        if eval_for_indices(policy):
+            count += 1
+    return count
+    
+def eval_for_indices(policy):
+    one = policy['char'] == policy['password'][policy['min'] - 1]
+    two = policy['char'] == policy['password'][policy['max'] - 1]
+    if one and two:
+        return False
+    return one or two
